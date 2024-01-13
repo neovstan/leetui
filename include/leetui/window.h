@@ -67,6 +67,7 @@ class Window {
   Frame* focus_frame_;
   std::unordered_map<std::string, Font> fonts_;
   std::unordered_map<std::string, Image> images_;
+  std::unordered_map<Controller::MouseButton, bool> mouse_button_state_;
 
  private:
   Point position_;

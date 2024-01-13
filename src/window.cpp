@@ -135,7 +135,8 @@ void leetui::Window::process() {
         }
       }
 
-      if (mouse_pos_.is_between_points(p1[child], p2[child])) {
+      if (mouse_pos_.is_between_points(p1[child], p2[child]) &&
+          !mouse_button_state_[Controller::MouseButton::left]) {
         hovered_frame_ = child;
       }
     }
@@ -247,10 +248,12 @@ void leetui::Window::draw_label(Point cs, int min_alpha, Label* label) const {
 
 void leetui::Window::mouse_button_down(const Point& p, Controller::MouseButton button) {
   clicks_.push_back({p, button});
+  mouse_button_state_[button] = true;
 }
 
 void leetui::Window::mouse_button_up(const Point& p, Controller::MouseButton button) {
   presses_.push_back({p, button});
+  mouse_button_state_[button] = false;
 }
 
 void leetui::Window::mouse_move(const Point& p) {
