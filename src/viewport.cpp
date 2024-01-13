@@ -14,7 +14,7 @@ leetui::Viewport::Viewport(Frame* parent)
   wheel.connect([this](double delta) {
     if (!active_) return;
 
-    static auto sign = [](double x) { return x / abs(x); };
+    static auto sign = [](double x) { return x / std::abs(x); };
 
     delta = -sign(delta) * 20;
     if (offset_ + delta < max_offset()) {
