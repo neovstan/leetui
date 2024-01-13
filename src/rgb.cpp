@@ -9,10 +9,10 @@ leetui::Rgb::Rgb(int r, int g, int b, int a) : r_{r}, g_{g}, b_{b}, a_{a} {
 }
 
 leetui::Rgb::Rgb(unsigned int argb)
-    : r_{(argb >> r_shift) & 0xFF},
-      g_{(argb >> g_shift) & 0xFF},
-      b_{(argb >> b_shift) & 0xFF},
-      a_{(argb >> a_shift) & 0xFF} {
+    : r_((argb >> r_shift) & 0xFF),
+      g_((argb >> g_shift) & 0xFF),
+      b_((argb >> b_shift) & 0xFF),
+      a_((argb >> a_shift) & 0xFF) {
 }
 
 int leetui::Rgb::r() const {
