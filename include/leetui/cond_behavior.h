@@ -1,13 +1,13 @@
 #ifndef LEETUI_COND_BEHAVIOR_H
 #define LEETUI_COND_BEHAVIOR_H
 
-#include <string>
-#include <functional>
-#include <vector>
 #include <chrono>
+#include <functional>
+#include <string>
+#include <vector>
 
-#include "signal.h"
 #include "easing_curves.h"
+#include "signal.h"
 
 namespace leetui {
 class Frame;

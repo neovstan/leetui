@@ -1,9 +1,9 @@
 #ifndef LEETUI_CONTROLLER_H
 #define LEETUI_CONTROLLER_H
 
-#include "signal.h"
-#include "point.h"
 #include "keyboard.h"
+#include "point.h"
+#include "signal.h"
 
 namespace leetui {
 class Controller {
@@ -16,9 +16,9 @@ class Controller {
   Keyboard keyboard() const;
 
  public:
-  Signal<void(Point&, MouseButton)> mouse_button_down;
-  Signal<void(Point&, MouseButton)> mouse_button_up;
-  Signal<void(Point&)> mouse_move;
+  Signal<void(const Point&, MouseButton)> mouse_button_down;
+  Signal<void(const Point&, MouseButton)> mouse_button_up;
+  Signal<void(const Point&)> mouse_move;
   Signal<void(double)> mouse_wheel;
   Signal<void(const Key&)> key_down;
   Signal<void(const Key&)> key_up;

@@ -1,8 +1,8 @@
 #ifndef LEETUI_MOUSE_ACTION_H
 #define LEETUI_MOUSE_ACTION_H
 
-#include "point.h"
 #include "controller.h"
+#include "point.h"
 
 namespace leetui {
 struct MouseAction {

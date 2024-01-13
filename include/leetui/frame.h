@@ -3,12 +3,12 @@
 
 #include <unordered_map>
 
-#include "point.h"
-#include "size.h"
 #include "color.h"
-#include "signal.h"
 #include "controller.h"
 #include "painter.h"
+#include "point.h"
+#include "signal.h"
+#include "size.h"
 
 namespace leetui {
 class Window;

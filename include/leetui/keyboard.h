@@ -1,8 +1,8 @@
 #ifndef LEETUI_KEYBOARD_H
 #define LEETUI_KEYBOARD_H
 
-#include <string>
 #include <map>
+#include <string>
 
 namespace leetui {
 class Key {

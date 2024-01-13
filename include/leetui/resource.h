@@ -1,12 +1,12 @@
 #ifndef LEETUI_RESOURCE_H
 #define LEETUI_RESOURCE_H
 
-#include <unordered_map>
-#include <string>
 #include <cstdint>
+#include <string>
+#include <unordered_map>
 
 namespace leetui {
-using raw_data_t = std::uint8_t*;
+using raw_data_t = const char*;
 
 struct Resource {
   raw_data_t data;
@@ -21,11 +21,6 @@ class Resources {
   Resources(const Resources&) = delete;
 
   void set(const std::string& key, raw_data_t data, std::uint64_t size);
-
-  template <std::uint64_t Size>
-  void set(const std::string& key, const std::uint8_t (&data)[Size]) {
-    set(key, raw_data_t(data), Size);
-  }
 
   Resource get(const std::string& key) const;
 

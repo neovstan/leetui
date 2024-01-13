@@ -229,7 +229,7 @@ void leetui::Window::remove_frame(Frame* parent, Frame* child) {
 void leetui::Window::draw_frame(Point cs, int min_alpha, Frame* frame) const {
   painter()->draw_rectangle(
       cs, cs + Point{frame->size().width(), frame->size().height()},
-      frame->transparent() ? Rgb{0, 0, 0} : frame->color().rgb().set_a(min_alpha),
+      frame->transparent() ? Rgb{0, 0, 0, 0} : frame->color().rgb().set_a(min_alpha),
       frame->rounding());
   if (frame->texture() && min_alpha > 0) {
     painter()->draw_image(frame->texture(), cs,

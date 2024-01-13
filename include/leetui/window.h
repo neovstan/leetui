@@ -5,14 +5,14 @@
 #include <unordered_map>
 #include <vector>
 
-#include "point.h"
-#include "size.h"
-#include "painter.h"
 #include "controller.h"
-#include "mouse_action.h"
 #include "font.h"
 #include "image.h"
 #include "label.h"
+#include "mouse_action.h"
+#include "painter.h"
+#include "point.h"
+#include "size.h"
 
 namespace leetui {
 class Frame;

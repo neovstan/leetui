@@ -1,10 +1,10 @@
 #ifndef LEETUI_SIGNAL_H
 #define LEETUI_SIGNAL_H
 
-#include <vector>
+#include <cstdint>
 #include <functional>
 #include <unordered_map>
-#include <cstdint>
+#include <vector>
 
 namespace leetui {
 using slot_key_t = std::uint64_t;
