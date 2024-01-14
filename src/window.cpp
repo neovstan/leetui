@@ -1,5 +1,8 @@
 #include "window.h"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb_image.h>
+
 #include <algorithm>
 #include <functional>
 #include <queue>
@@ -186,9 +189,45 @@ void leetui::Window::add_font(const std::string& name, const std::string& resour
   fonts_[name] = {native, size};
 }
 
+/**
+ * I decided to add image parsing functionality in leetui, since this must be done when working with
+ * abosolutely any graphic driver. Thus, we provide a raw graphics buffer as input to painter. All
+ * he has to do is create a texture out of it.
+ */
 void leetui::Window::add_image(const std::string& name, const std::string& resource) {
-  auto native = painter()->add_image(Resources::instance().get(resource));
+  auto rsc = Resources::instance().get(resource);
+  int width{}, height{};
+  auto buffer = stbi_load_from_memory(reinterpret_cast<const stbi_uc*>(rsc.data),
+                                      static_cast<int>(rsc.size), &width, &height, NULL, 4);
+  auto native = painter()->add_image(
+      {reinterpret_cast<const char*>(buffer), static_cast<std::uint64_t>(width * height)}, width,
+      height);
+
+  stbi_image_free(buffer);
+
   images_[name] = {native};
+}
+
+void leetui::Window::add_movie(const std::string& name, const std::string& resource) {
+  auto rsc = Resources::instance().get(resource);
+
+  Movie movie{};
+  int *delays{}, width{}, height{}, frame_count{};
+  // We decode the GIF image. The buffer contains a stream of frames
+  auto buffer = stbi_load_gif_from_memory(reinterpret_cast<const stbi_uc*>(rsc.data),
+                                          static_cast<int>(rsc.size), &delays, &width, &height,
+                                          &frame_count, NULL, 4);
+  auto frame_size = width * height * 4ULL;
+  // Create a texture for each frame of a GIF image
+  for (int i = 0; i < frame_count; ++i) {
+    auto texture = painter()->add_image(
+        {reinterpret_cast<const char*>(&buffer[frame_size * i]), frame_size}, width, height);
+
+    movie.add_frame({delays[i], Image{texture}});
+  }
+
+  stbi_image_free(buffer);
+  movies_[name] = movie;
 }
 
 leetui::Font leetui::Window::get_font(const std::string& name) const {
@@ -197,6 +236,10 @@ leetui::Font leetui::Window::get_font(const std::string& name) const {
 
 leetui::Image leetui::Window::get_image(const std::string& name) const {
   return images_.at(name);
+}
+
+leetui::Movie leetui::Window::get_movie(const std::string& name) const {
+  return movies_.at(name);
 }
 
 leetui::Controller* leetui::Window::controller() const {

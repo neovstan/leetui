@@ -5,6 +5,7 @@
 
 #include "color.h"
 #include "controller.h"
+#include "movie.h"
 #include "painter.h"
 #include "point.h"
 #include "signal.h"
@@ -56,6 +57,7 @@ class Frame {
   void set_child_layout(Layout* layout);
   void set_parent_layout(Layout* layout);
   void set_image(const std::string& image);
+  void set_movie(const std::string& movie);
   void set_param(const std::string& key, double value);
   void set_transparent(bool transparent);
 
@@ -85,6 +87,7 @@ class Frame {
   Layout* parent_layout_;
   bool label_;
   Painter::native_texture_t texture_;
+  Movie movie_;
   std::unordered_map<std::string, double> params_;
   std::vector<CondBehavior*> cond_behaviors_;
   bool transparent_;

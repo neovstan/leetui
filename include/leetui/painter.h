@@ -26,7 +26,8 @@ class Painter {
                          const Color& color) = 0;
   virtual Size calc_text_size(native_font_t font, double size, const std::string& text) = 0;
 
-  virtual native_texture_t add_image(const Resource& resource) = 0;
+  virtual native_texture_t add_image(const Resource& resource, std::uint32_t width,
+                                     std::uint32_t height) = 0;
   virtual void draw_image(native_texture_t p, const Point& p1, const Point& p2) = 0;
 };
 }  // namespace leetui

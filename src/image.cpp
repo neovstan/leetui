@@ -1,5 +1,7 @@
 #include "image.h"
 
+#include "stb_image.h"
+
 leetui::Image::Image() : native_{} {
 }
 
