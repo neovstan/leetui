@@ -2,7 +2,6 @@
 
 #include "cond_behavior.h"
 #include "layout.h"
-#include "resource.h"
 #include "window.h"
 
 leetui::Frame::Frame(Window* window)
@@ -14,8 +13,7 @@ leetui::Frame::Frame(Window* window)
       visible_{true},
       active_{true},
       rounding_{},
-      child_layout_{},
-      parent_layout_{},
+      layout_{},
       label_{},
       texture_{},
       transparent_{true} {
@@ -31,8 +29,7 @@ leetui::Frame::Frame(Frame* parent)
       visible_{true},
       active_{true},
       rounding_{},
-      child_layout_{},
-      parent_layout_{},
+      layout_{},
       label_{},
       texture_{},
       transparent_{true} {
@@ -41,8 +38,8 @@ leetui::Frame::Frame(Frame* parent)
 
 leetui::Frame::~Frame() {
   window_->remove_frame(parent_, this);
-  if (child_layout_) delete child_layout_;
-  if (parent_layout_) parent_layout_->remove_item(this);
+  if (layout_) delete layout_;
+  if (parent() && parent()->layout()) parent()->layout()->remove_item(this);
   auto cb = cond_behaviors_;
   for (auto p : cb) delete p;
 }
@@ -79,12 +76,8 @@ double leetui::Frame::rounding() const {
   return rounding_;
 }
 
-leetui::Layout* leetui::Frame::child_layout() const {
-  return child_layout_;
-}
-
-leetui::Layout* leetui::Frame::parent_layout() const {
-  return parent_layout_;
+leetui::Layout* leetui::Frame::layout() const {
+  return layout_;
 }
 
 bool leetui::Frame::label() const {
@@ -117,7 +110,10 @@ void leetui::Frame::move(const Point& position) {
 
 void leetui::Frame::resize(const Size& size) {
   size_ = size;
-  if (parent_layout_) parent_layout_->rebuild();
+  for (auto p = parent(); p != nullptr; p = p->parent()) {
+    if (!p->layout()) break;
+    p->layout()->rebuild();
+  }
 }
 
 void leetui::Frame::set_color(const Color& color) {
@@ -145,12 +141,8 @@ void leetui::Frame::set_rounding(double rounding) {
   rounding_ = rounding;
 }
 
-void leetui::Frame::set_child_layout(Layout* layout) {
-  child_layout_ = layout;
-}
-
-void leetui::Frame::set_parent_layout(Layout* layout) {
-  parent_layout_ = layout;
+void leetui::Frame::set_layout(Layout* layout) {
+  layout_ = layout;
 }
 
 void leetui::Frame::set_image(const std::string& image) {

@@ -33,8 +33,7 @@ class Frame {
   bool visible() const;
   bool active() const;
   double rounding() const;
-  Layout* child_layout() const;
-  Layout* parent_layout() const;
+  Layout* layout() const;
   bool label() const;
   Painter::native_texture_t texture() const;
   double param(const std::string& key);
@@ -53,8 +52,7 @@ class Frame {
 
   void set_active(bool active);
   void set_rounding(double rounding);
-  void set_child_layout(Layout* layout);
-  void set_parent_layout(Layout* layout);
+  void set_layout(Layout* layout);
   void set_image(const std::string& image);
   void set_param(const std::string& key, double value);
   void set_transparent(bool transparent);
@@ -81,8 +79,7 @@ class Frame {
   bool visible_;
   bool active_;
   double rounding_;
-  Layout* child_layout_;
-  Layout* parent_layout_;
+  Layout* layout_;
   bool label_;
   Painter::native_texture_t texture_;
   std::unordered_map<std::string, double> params_;
