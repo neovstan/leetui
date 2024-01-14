@@ -104,13 +104,18 @@ void leetui::Window::process() {
 
       cs[child] = cs[frame] + child->position();
 
-      p1[child].set_x(std::max(cs[child].x(), p1[frame].x()));
-      p1[child].set_y(std::max(cs[child].y(), p1[frame].y()));
+      if (!child->popup()) {
+        p1[child].set_x(std::max(cs[child].x(), p1[frame].x()));
+        p1[child].set_y(std::max(cs[child].y(), p1[frame].y()));
 
-      p2[child].set_x(std::min(cs[child].x() + child->size().width(), p2[frame].x()));
-      p2[child].set_y(std::min(cs[child].y() + child->size().height(), p2[frame].y()));
+        p2[child].set_x(std::min(cs[child].x() + child->size().width(), p2[frame].x()));
+        p2[child].set_y(std::min(cs[child].y() + child->size().height(), p2[frame].y()));
 
-      painter()->push_scissor(p1[child], p2[child]);
+        painter()->push_scissor(p1[child], p2[child]);
+      } else {
+        p1[child] = cs[child];
+        p2[child] = cs[child] + Point{child->size().width(), child->size().height()};
+      }
 
       q.push(child);
 
@@ -122,7 +127,7 @@ void leetui::Window::process() {
         draw_label(cs[child], min_alpha[child], dynamic_cast<Label*>(child));
       }
 
-      painter()->pop_scissor();
+      if (!child->popup()) painter()->pop_scissor();
 
       if (!active[child]) continue;
 

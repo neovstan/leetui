@@ -16,7 +16,8 @@ leetui::Frame::Frame(Window* window)
       layout_{},
       label_{},
       texture_{},
-      transparent_{true} {
+      transparent_{true},
+      popup_{} {
   window_->add_frame(parent_, this);
 }
 
@@ -32,7 +33,8 @@ leetui::Frame::Frame(Frame* parent)
       layout_{},
       label_{},
       texture_{},
-      transparent_{true} {
+      transparent_{true},
+      popup_{} {
   window_->add_frame(parent_, this);
 }
 
@@ -100,6 +102,10 @@ int leetui::Frame::alpha() const {
   return color_.rgb().a();
 }
 
+bool leetui::Frame::popup() const {
+  return popup_;
+}
+
 leetui::Frame::operator bool() const {
   return visible() && position() && size();
 }
@@ -133,6 +139,19 @@ void leetui::Frame::hide() {
   visible_ = false;
 }
 
+leetui::Frame* leetui::Frame::deepen(int depth) {
+  auto frame = this;
+  while (depth--) {
+    frame = new Frame{frame};
+    frame->move({0, 0});
+    frame->resize({0, 0});
+    frame->set_active(true);
+    frame->set_popup(popup());
+  }
+  frame->set_active(active());
+  return frame;
+}
+
 void leetui::Frame::set_active(bool active) {
   active_ = active;
 }
@@ -159,4 +178,8 @@ void leetui::Frame::set_param(const std::string& key, double value) {
 
 void leetui::Frame::set_transparent(bool transparent) {
   transparent_ = transparent;
+}
+
+void leetui::Frame::set_popup(bool popup) {
+  popup_ = popup;
 }
