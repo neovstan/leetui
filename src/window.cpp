@@ -163,6 +163,7 @@ void leetui::Window::process() {
   for (auto& p : frames_pressed) {
     auto press = p.first;
     auto frame = p.second;
+    if (frame != focus_frame_) continue;
     frame->pressed.emit(press.point - cs[frame], press.button);
   }
 
