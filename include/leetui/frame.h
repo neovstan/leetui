@@ -25,6 +25,7 @@ class Frame {
 
   virtual ~Frame();
 
+ public:
   Window* window() const;
   Frame* parent() const;
   Point position() const;
@@ -39,23 +40,30 @@ class Frame {
   double param(const std::string& key);
   bool transparent() const;
   int alpha() const;
+  bool popup() const;
 
+ public:
   operator bool() const;
 
+ public:
   void move(const Point& position);
   void resize(const Size& size);
-  void set_color(const Color& color);
-  void set_alpha(int alpha);
 
+ public:
   void show();
   void hide();
+  Frame* deepen(int depth);
 
+ public:
+  void set_color(const Color& color);
+  void set_alpha(int alpha);
   void set_active(bool active);
   void set_rounding(double rounding);
   void set_layout(Layout* layout);
   void set_image(const std::string& image);
   void set_param(const std::string& key, double value);
   void set_transparent(bool transparent);
+  void set_popup(bool popup);
 
  public:
   Signal<void(const Point&, Controller::MouseButton)> clicked;
@@ -85,6 +93,7 @@ class Frame {
   std::unordered_map<std::string, double> params_;
   std::vector<CondBehavior*> cond_behaviors_;
   bool transparent_;
+  bool popup_;
 };
 }  // namespace leetui
 
