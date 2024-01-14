@@ -168,6 +168,10 @@ void leetui::Frame::set_image(const std::string& image) {
   texture_ = window()->get_image(image).native();
 }
 
+void leetui::Frame::set_movie(const std::string& movie) {
+  movie_ = window()->get_movie(movie);
+}
+
 void leetui::Frame::set_param(const std::string& key, double value) {
   params_[key] = value;
 }

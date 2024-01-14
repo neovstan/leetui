@@ -10,6 +10,7 @@
 #include "image.h"
 #include "label.h"
 #include "mouse_action.h"
+#include "movie.h"
 #include "painter.h"
 #include "point.h"
 #include "size.h"
@@ -33,9 +34,11 @@ class Window {
 
   void add_font(const std::string& name, const std::string& resource, double size);
   void add_image(const std::string& name, const std::string& resource);
+  void add_movie(const std::string& name, const std::string& resource);
 
   Font get_font(const std::string& name) const;
   Image get_image(const std::string& name) const;
+  Movie get_movie(const std::string& name) const;
 
   Controller* controller() const;
 
@@ -67,6 +70,7 @@ class Window {
   Frame* focus_frame_;
   std::unordered_map<std::string, Font> fonts_;
   std::unordered_map<std::string, Image> images_;
+  std::unordered_map<std::string, Movie> movies_;
   std::unordered_map<Controller::MouseButton, bool> mouse_button_state_;
 
  private:
