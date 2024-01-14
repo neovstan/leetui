@@ -284,10 +284,14 @@ void leetui::Window::draw_frame(Point cs, int min_alpha, Frame* frame) const {
 
 void leetui::Window::draw_label(Point cs, int min_alpha, Label* label) const {
   const auto font = get_font(label->font());
+  const auto size = painter()->calc_text_size(font.native(), font.size(), label->text());
+  if (label->size() != size) {
+    if (label->parent()) cs = cs - label->parent()->position();
+    label->resize(size);
+    if (label->parent()) cs = cs + label->parent()->position();
+  }
   painter()->draw_text(label->text(), font.native(), font.size(), cs,
                        label->color().rgb().set_a(min_alpha));
-  const auto size = painter()->calc_text_size(font.native(), font.size(), label->text());
-  label->resize(size);
 }
 
 void leetui::Window::mouse_button_down(const Point& p, Controller::MouseButton button) {

@@ -6,7 +6,7 @@
 
 leetui::Layout::Layout(Type type, Frame* frame)
     : type_{type}, frame_{frame}, padding_{}, distance_{}, alignment_{} {
-  frame_->set_child_layout(this);
+  frame_->set_layout(this);
 }
 
 leetui::Size leetui::Layout::padding() const {
@@ -44,7 +44,6 @@ void leetui::Layout::add_separator(double size) {
 
 void leetui::Layout::add_item(Frame* item) {
   items_.push_back(item);
-  item->set_parent_layout(this);
   rebuild();
 }
 
