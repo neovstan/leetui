@@ -1,17 +1,23 @@
 #include "movie.h"
 
-// #define STB_IMAGE_IMPLEMENTATION
-// #include <stb_image.h>
-
-leetui::Movie::Movie() : repeat_{true}, frame_counter_{} {
+leetui::Movie::Movie() : paused_{}, repeat_{true}, frame_counter_{} {
 }
 
-// leetui::Movie::Movie(const Resource& resource, Frame* parent) {
-//   int *delays{nullptr}, width{}, height{}, frames{};
-//   auto buffer = stbi_load_gif_from_memory(reinterpret_cast<const stbi_uc*>(resource.data),
-//                                           static_cast<int>(resource.size), &delays, &width,
-//                                           &height, &frames, NULL, 4);
-// }
+void leetui::Movie::pause() {
+  paused_ = true;
+}
+
+void leetui::Movie::resume() {
+  paused_ = false;
+}
+
+bool leetui::Movie::is_empty() const {
+  return frames_.empty();
+}
+
+bool leetui::Movie::is_paused() const {
+  return paused_;
+}
 
 leetui::native_movie_t leetui::Movie::current_frame() const {
   return frames_.at(frame_counter_);

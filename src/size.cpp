@@ -1,5 +1,7 @@
 #include "size.h"
 
+#include "point.h"
+
 leetui::Size::Size() : width_{}, height_{}, inf_{true} {
 }
 
@@ -64,6 +66,10 @@ leetui::Size& leetui::Size::operator*=(const Size& rhs) {
 leetui::Size& leetui::Size::operator/=(const Size& rhs) {
   *this = *this / rhs;
   return *this;
+}
+
+leetui::Size::operator Point() const {
+  return {width(), height()};
 }
 
 leetui::Size& leetui::Size::operator*=(double rhs) {

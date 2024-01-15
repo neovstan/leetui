@@ -21,6 +21,9 @@ class Point {
   bool is_in_rectangle(const Point& p, const Size& size) const;
   bool is_between_points(const Point& p1, const Point& p2) const;
 
+  void operator+=(const Point& rhs);
+  void operator-=(const Point& rhs);
+
   operator bool() const;
 
  private:

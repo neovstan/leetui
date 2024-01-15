@@ -50,6 +50,8 @@ add_library(leetui STATIC
 	src/window.cpp
 	
 	third-party/stb/stb_image.h
+        include/leetui/tree.h
+        src/tree.cpp
 )
 
 target_include_directories(leetui PRIVATE include/leetui third-party/stb)

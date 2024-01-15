@@ -39,9 +39,9 @@ class Frame {
   bool label() const;
   Painter::native_texture_t texture() const;
   double param(const std::string& key);
-  bool transparent() const;
-  int alpha() const;
+  double opacity() const;
   bool popup() const;
+  Movie& movie();
 
  public:
   operator bool() const;
@@ -57,14 +57,14 @@ class Frame {
 
  public:
   void set_color(const Color& color);
-  void set_alpha(int alpha);
+  void set_opacity(double opacity);
   void set_active(bool active);
   void set_rounding(double rounding);
   void set_layout(Layout* layout);
+  void set_texture(Painter::native_texture_t texture);
   void set_image(const std::string& image);
   void set_movie(const std::string& movie);
   void set_param(const std::string& key, double value);
-  void set_transparent(bool transparent);
   void set_popup(bool popup);
 
  public:
@@ -86,6 +86,7 @@ class Frame {
   Point position_;
   Size size_;
   Color color_;
+  double opacity_;
   bool visible_;
   bool active_;
   double rounding_;
@@ -95,7 +96,6 @@ class Frame {
   Movie movie_;
   std::unordered_map<std::string, double> params_;
   std::vector<CondBehavior*> cond_behaviors_;
-  bool transparent_;
   bool popup_;
 };
 }  // namespace leetui
