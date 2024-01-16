@@ -10,15 +10,15 @@ leetui::Frame::Frame(Window* window)
       position_{},
       size_{},
       color_{nothing},
+      opacity_{1.0},
       visible_{true},
       active_{true},
       rounding_{},
       layout_{},
       label_{},
       texture_{},
-      transparent_{true},
       popup_{} {
-  window_->add_frame(parent_, this);
+  window_->add_frame(this);
 }
 
 leetui::Frame::Frame(Frame* parent)
@@ -27,19 +27,19 @@ leetui::Frame::Frame(Frame* parent)
       position_{},
       size_{},
       color_{nothing},
+      opacity_{1.0},
       visible_{true},
       active_{true},
       rounding_{},
       layout_{},
       label_{},
       texture_{},
-      transparent_{true},
       popup_{} {
-  window_->add_frame(parent_, this);
+  window_->add_frame(this);
 }
 
 leetui::Frame::~Frame() {
-  window_->remove_frame(parent_, this);
+  window_->remove_frame(this);
   if (layout_) delete layout_;
   if (parent() && parent()->layout()) parent()->layout()->remove_item(this);
   auto cb = cond_behaviors_;
@@ -94,16 +94,16 @@ double leetui::Frame::param(const std::string& key) {
   return params_[key];
 }
 
-bool leetui::Frame::transparent() const {
-  return transparent_;
-}
-
-int leetui::Frame::alpha() const {
-  return color_.rgb().a();
+double leetui::Frame::opacity() const {
+  return opacity_;
 }
 
 bool leetui::Frame::popup() const {
   return popup_;
+}
+
+leetui::Movie& leetui::Frame::movie() {
+  return movie_;
 }
 
 leetui::Frame::operator bool() const {
@@ -123,12 +123,11 @@ void leetui::Frame::resize(const Size& size) {
 }
 
 void leetui::Frame::set_color(const Color& color) {
-  transparent_ = color == nothing;
   color_ = color;
 }
 
-void leetui::Frame::set_alpha(int alpha) {
-  color_ = color_.rgb().set_a(alpha);
+void leetui::Frame::set_opacity(double opacity) {
+  opacity_ = opacity;
 }
 
 void leetui::Frame::show() {
@@ -164,16 +163,27 @@ void leetui::Frame::set_layout(Layout* layout) {
   layout_ = layout;
 }
 
+void leetui::Frame::set_texture(Painter::native_texture_t texture) {
+  texture_ = texture;
+}
+
 void leetui::Frame::set_image(const std::string& image) {
+  if (color_.rgb().a() == 0) color_ = color_.rgb().set_a(255);
   texture_ = window()->get_image(image).native();
+}
+
+void leetui::Frame::set_movie(const std::string& movie) {
+  if (movie.empty()) {
+    movie_ = {};
+    return;
+  }
+
+  if (color_.rgb().a() == 0) color_ = color_.rgb().set_a(255);
+  movie_ = window()->get_movie(movie);
 }
 
 void leetui::Frame::set_param(const std::string& key, double value) {
   params_[key] = value;
-}
-
-void leetui::Frame::set_transparent(bool transparent) {
-  transparent_ = transparent;
 }
 
 void leetui::Frame::set_popup(bool popup) {

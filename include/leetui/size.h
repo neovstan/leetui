@@ -2,6 +2,8 @@
 #define LEETUI_SIZE_H
 
 namespace leetui {
+class Point;
+
 class Size {
  public:
   Size();
@@ -27,6 +29,8 @@ class Size {
 
   Size& operator*=(double rhs);
   Size& operator/=(double rhs);
+
+  operator Point() const;
 
  private:
   double width_;

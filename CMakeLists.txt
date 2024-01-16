@@ -14,6 +14,7 @@ add_library(leetui STATIC
 	include/leetui/label.h
 	include/leetui/layout.h
 	include/leetui/mouse_action.h
+	include/leetui/movie.h
 	include/leetui/painter.h
 	include/leetui/point.h
 	include/leetui/resource.h
@@ -24,7 +25,8 @@ add_library(leetui STATIC
 	include/leetui/vector.h
 	include/leetui/viewport.h
 	include/leetui/window.h
-	
+	include/leetui/tree.h
+
 	src/color.cpp
 	src/cond_behavior.cpp
 	src/controller.cpp
@@ -36,6 +38,7 @@ add_library(leetui STATIC
 	src/label.cpp
 	src/layout.cpp
 	src/mouse_action.cpp
+	src/movie.cpp
 	src/painter.cpp
 	src/point.cpp
 	src/resource.cpp
@@ -46,9 +49,12 @@ add_library(leetui STATIC
 	src/vector.cpp
 	src/viewport.cpp
 	src/window.cpp
+	src/tree.cpp
+
+	third-party/stb/stb_image.h
 )
 
-target_include_directories(leetui PRIVATE include/leetui)
+target_include_directories(leetui PRIVATE include/leetui third-party/stb)
 target_include_directories(leetui PUBLIC include)
 
 set_target_properties(leetui PROPERTIES CXX_STANDARD 11)

@@ -43,6 +43,14 @@ bool leetui::Point::is_between_points(const Point& p1, const Point& p2) const {
   return x() >= p1.x() && x() <= p2.x() && y() >= p1.y() && y() <= p2.y();
 }
 
+void leetui::Point::operator+=(const Point& rhs) {
+  *this = *this + rhs;
+}
+
+void leetui::Point::operator-=(const Point& rhs) {
+  *this = *this - rhs;
+}
+
 leetui::Point::operator bool() const {
   return !inf_;
 }

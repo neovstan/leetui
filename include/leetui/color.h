@@ -18,7 +18,7 @@ class Color {
 bool operator==(const Color& lhs, const Color& rhs);
 bool operator!=(const Color& lhs, const Color& rhs);
 
-const Color nothing{-1, -1, -1, -1};
+const Color nothing{0, 0, 0, 0};
 const Color white{255, 255, 255};
 const Color black{0, 0, 0};
 const Color red{255, 0, 0};
