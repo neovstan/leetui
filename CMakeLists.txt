@@ -52,7 +52,7 @@ add_library(leetui STATIC
 	third-party/stb/stb_image.h
         include/leetui/tree.h
         src/tree.cpp
-)
+ "include/leetui/corner.h" "src/corner.cpp")
 
 target_include_directories(leetui PRIVATE include/leetui third-party/stb)
 target_include_directories(leetui PUBLIC include)
