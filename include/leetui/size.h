@@ -30,7 +30,7 @@ class Size {
   Size& operator*=(double rhs);
   Size& operator/=(double rhs);
 
-  operator Point() const;
+  operator leetui::Point() const;
 
  private:
   double width_;

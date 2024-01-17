@@ -18,7 +18,7 @@ class Text : public Frame {
   std::string text() const;
   Color color() const;
   Color background_color() const;
-  double rounding() const;
+  Corner rounding() const;
 
  public:
   void set_fixed_width(double width);
@@ -27,7 +27,7 @@ class Text : public Frame {
   void set_padding(const Size& padding);
   void set_color(const Color& color);
   void set_background_color(const Color& color);
-  void set_rounding(double x);
+  void set_rounding(const Corner& x);
 
  private:
   Frame* label_frame_;

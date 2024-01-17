@@ -68,7 +68,7 @@ leetui::Size& leetui::Size::operator/=(const Size& rhs) {
   return *this;
 }
 
-leetui::Size::operator Point() const {
+leetui::Size::operator leetui::Point() const {
   return {width(), height()};
 }
 

@@ -5,6 +5,7 @@
 
 #include "color.h"
 #include "controller.h"
+#include "corner.h"
 #include "movie.h"
 #include "painter.h"
 #include "point.h"
@@ -14,7 +15,7 @@
 namespace leetui {
 class Window;
 class Layout;
-class Resource;
+struct Resource;
 class CondBehavior;
 
 class Frame {
@@ -34,7 +35,7 @@ class Frame {
   Color color() const;
   bool visible() const;
   bool active() const;
-  double rounding() const;
+  Corner rounding() const;
   Layout* layout() const;
   bool label() const;
   Painter::native_texture_t texture() const;
@@ -59,7 +60,7 @@ class Frame {
   void set_color(const Color& color);
   void set_opacity(double opacity);
   void set_active(bool active);
-  void set_rounding(double rounding);
+  void set_rounding(const Corner& rounding);
   void set_layout(Layout* layout);
   void set_texture(Painter::native_texture_t texture);
   void set_image(const std::string& image);
@@ -89,7 +90,7 @@ class Frame {
   double opacity_;
   bool visible_;
   bool active_;
-  double rounding_;
+  Corner rounding_;
   Layout* layout_;
   bool label_;
   Painter::native_texture_t texture_;

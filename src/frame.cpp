@@ -74,7 +74,7 @@ bool leetui::Frame::active() const {
   return active_;
 }
 
-double leetui::Frame::rounding() const {
+leetui::Corner leetui::Frame::rounding() const {
   return rounding_;
 }
 
@@ -155,7 +155,7 @@ void leetui::Frame::set_active(bool active) {
   active_ = active;
 }
 
-void leetui::Frame::set_rounding(double rounding) {
+void leetui::Frame::set_rounding(const Corner& rounding) {
   rounding_ = rounding;
 }
 

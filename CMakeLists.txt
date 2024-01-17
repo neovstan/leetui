@@ -26,6 +26,7 @@ add_library(leetui STATIC
 	include/leetui/viewport.h
 	include/leetui/window.h
 	include/leetui/tree.h
+        include/leetui/corner.h
 
 	src/color.cpp
 	src/cond_behavior.cpp
@@ -50,6 +51,7 @@ add_library(leetui STATIC
 	src/viewport.cpp
 	src/window.cpp
 	src/tree.cpp
+        src/corner.cpp
 
 	third-party/stb/stb_image.h
 )

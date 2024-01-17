@@ -28,7 +28,7 @@ leetui::Color leetui::Text::background_color() const {
   return label_frame_->color();
 }
 
-double leetui::Text::rounding() const {
+leetui::Corner leetui::Text::rounding() const {
   return label_frame_->rounding();
 }
 
@@ -66,6 +66,6 @@ void leetui::Text::set_background_color(const Color& color) {
   label_frame_->set_color(color);
 }
 
-void leetui::Text::set_rounding(double x) {
+void leetui::Text::set_rounding(const Corner& x) {
   label_frame_->set_rounding(x);
 }
