@@ -9,9 +9,9 @@ leetui::Corner::Corner(double all)
 
 leetui::Corner::Corner(double top_left, double bottom_right)
     : top_left_{top_left},
-      top_right_{bottom_right_},
+      top_right_{bottom_right},
       bottom_right_{top_left},
-      bottom_left_{bottom_right_} {
+      bottom_left_{bottom_right} {
 }
 
 leetui::Corner::Corner(double top_left, double top_right, double bottom_right, double bottom_left)
