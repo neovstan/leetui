@@ -4,6 +4,9 @@
 
 #include "frame.h"
 
+leetui::Layout::Layout() {
+}
+
 leetui::Layout::Layout(Type type, Frame* frame)
     : type_{type}, frame_{frame}, padding_{}, distance_{}, alignment_{} {
   frame_->set_layout(this);

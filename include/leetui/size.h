@@ -8,6 +8,7 @@ class Size {
  public:
   Size();
   Size(double width, double height);
+  explicit Size(const Point& point);
 
   double width() const;
   double height() const;

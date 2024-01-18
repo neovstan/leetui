@@ -12,7 +12,7 @@ add_library(leetui STATIC
 	include/leetui/image.h
 	include/leetui/keyboard.h
 	include/leetui/label.h
-	include/leetui/layout.h
+
 	include/leetui/mouse_action.h
 	include/leetui/movie.h
 	include/leetui/painter.h
@@ -21,7 +21,7 @@ add_library(leetui STATIC
 	include/leetui/rgb.h
 	include/leetui/signal.h
 	include/leetui/size.h
-	include/leetui/text.h
+        include/leetui/text.h
 	include/leetui/vector.h
 	include/leetui/viewport.h
 	include/leetui/window.h
@@ -37,7 +37,7 @@ add_library(leetui STATIC
 	src/image.cpp
 	src/keyboard.cpp
 	src/label.cpp
-	src/layout.cpp
+
 	src/mouse_action.cpp
 	src/movie.cpp
 	src/painter.cpp
@@ -46,7 +46,7 @@ add_library(leetui STATIC
 	src/rgb.cpp
 	src/signal.cpp
 	src/size.cpp
-	src/text.cpp
+        src/text.cpp
 	src/vector.cpp
 	src/viewport.cpp
 	src/window.cpp
@@ -54,6 +54,10 @@ add_library(leetui STATIC
         src/corner.cpp
 
 	third-party/stb/stb_image.h
+        include/leetui/flex_layout.h
+        src/flex_layout.cpp
+        include/leetui/layout.h
+        src/layout.cpp
 )
 
 target_include_directories(leetui PRIVATE include/leetui third-party/stb)

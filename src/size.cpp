@@ -8,6 +8,9 @@ leetui::Size::Size() : width_{}, height_{}, inf_{true} {
 leetui::Size::Size(double width, double height) : width_{width}, height_{height}, inf_{false} {
 }
 
+leetui::Size::Size(const Point& point) : width_{point.x()}, height_{point.y()} {
+}
+
 double leetui::Size::width() const {
   return width_;
 }
